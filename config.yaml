@@ -1,0 +1,290 @@
+config:
+  backend: springboot
+  security: true
+  dataLoader: true
+  console: true
+  structure: technical # choose what structure you want your project to follow [technical, domain, mixed] 
+  complexity: simple # [simple, simple-process, abstract, abstract-process]
+
+properties:
+  loadData: true
+  frontend: http://localhost:4200
+
+project:
+  name: library-system
+  domain: org
+  groupID: bshg
+  usedJava: jakarta
+  port: 8036
+
+db:
+  type: mysql
+  name: library_system_db
+
+packagesName: # Set Costume Names for the packages
+  entity: entity
+  repository: repository
+  exceptions: exceptions
+  service: services
+  process: sprocess
+  webservice: webservice
+  converter: converter
+  dto: dto
+  controller: controller
+  utils: utils
+  security: mySecurity
+
+namingTemplate: # Set The Template to Generate The Classes
+  entity: '{C}'
+  repository: '{C}Dao'
+  service: '{C}Service'
+  serviceImpl: '{C}ServiceImpl'
+  createProcess: 'Create{C}Process'
+  updateProcess: 'Update{C}Process'
+  deleteProcess: 'Delete{C}Process'
+  createProcessImpl: 'Create{C}ProcessImpl'
+  updateProcessImpl: 'Update{C}ProcessImpl'
+  deleteProcessImpl: 'Delete{C}ProcessImpl'
+  injector: '{C}Injector'
+  converter: '{C}Converter'
+  dto: '{C}Dto'
+  controller: '{C}Controller'
+
+roles:
+  - ADMIN
+  - EMPLOYEE
+  - CLIENT
+
+# The Project Entities
+packages:
+  - name: user
+    packages:
+      - name: admin
+        entities:
+          - name: Admin#user-ADMIN[ADMIN]
+            fields:
+              - firstName
+              - lastName
+            associations:
+              - name: EmployeeAssignment
+                with: Employee
+                fields:
+                  - assignmentRole|enum-AssignmentRoleType
+                  - startDate|date
+                  - endDate|date
+                  - isActive|bool
+
+          - name: Employee#user-EMPLOYEE[ADMIN]
+            fields:
+              - firstName
+              - lastName
+              - dateOfBirth|date
+              - address|Address
+              - biography|txt
+              - position
+              - salary
+              - books|list-Book
+              - loans|list-Loan
+    entities:
+      - name: Staff#user-EMPLOYEE
+        authority: get(ADMIN,EMPLOYEE) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - firstName
+          - lastName
+          - position
+          - salary
+
+      - name: Client#user-CLIENT
+        authority: get(ADMIN,EMPLOYEE) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - firstName
+          - lastName
+          - dateOfBirth|date
+          - loans|list-Loan
+          - reservations|list-Reservation
+          - reviews|list-Review
+          - transactions|list-Transaction
+          - payments|list-Payment
+
+  - name: content
+    entities:
+      - name: Author
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - firstName
+          - lastName
+          - dateOfBirth|date
+          - nationality
+          - biography|txt
+        associations:
+          - with: Book
+            fields:
+              - contribution|float
+              - role|enum-BookAuthorRole
+
+      - name: Book
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - title
+          - publicationDate|date
+          - isbn
+          - pageCount|int
+          - description|txt
+          - genre|list-Genre{ManyToMany}
+
+      - name: Genre
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - magazines|list-Magazine
+
+      - name: Publisher
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - books|list-Book
+          - magazines|list-Magazine
+          - address|Address
+
+      - name: Category
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+
+      - name: Magazine
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - title
+          - publicationDate|date
+
+  - name: library
+    entities:
+      - name: Loan
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - book|Book
+          - loanDate|date
+          - returnDate|date
+
+      - name: Reservation
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - book|Book
+          - reservationDate|date
+          - status|enum-ReservationStatus
+
+      - name: Review
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - book|Book
+          - rating|int
+          - comment|txt
+          - reviewDate|date
+
+      - name: LibraryBranch
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - address|Address
+
+      - name: Address
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - street
+          - city
+          - state
+          - zipCode
+
+      - name: Country
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - addresses|list-Address
+
+      - name: Membership
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - startDate|date
+          - endDate|date
+          - status|enum-MembershipStatus
+          - client|Client
+
+  - name: event
+    entities:
+      - name: Money
+        fields:
+          - name
+          - amount|double
+
+      - name: Event
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - name
+          - startDate|date
+          - endDate|date
+          - location
+
+      - name: Transaction(Money)
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - transactionDate|date
+
+      - name: Payment(Money)
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - paymentDate|date
+
+  - name: storage
+    entities:
+      - name: Shelf
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - shelfNumber
+          - racks|list-Rack
+
+      - name: Rack
+        authority: get(**) delete(ADMIN,EMPLOYEE) update(ADMIN,EMPLOYEE) create(ADMIN,EMPLOYEE)
+        fields:
+          - rackNumber
+          - books|list-Book
+
+enums:
+  - name: AssignmentRoleType
+    constants:
+      - SUPERVISOR
+      - MANAGER
+      - TEAM_LEAD
+
+  - name: ReservationStatus
+    constants:
+      - PENDING
+      - APPROVED
+      - CANCELED
+      - COMPLETED
+
+  - name: MembershipStatus
+    constants:
+      - ACTIVE
+      - INACTIVE
+      - EXPIRED
+      - PENDING_APPROVAL
+      - CANCELED
+      - SUSPENDED
+      - REVOKED
+      - GRACE_PERIOD
+
+  - name: BookAuthorRole
+    constants:
+      - MAIN_AUTHOR
+      - CO_AUTHOR
+      - EDITOR
+      - CONTRIBUTOR
+      - GHOST_WRITER
+      - ILLUSTRATOR
+      - TRANSLATOR
+      - REVIEWER
+      - ADVISOR
