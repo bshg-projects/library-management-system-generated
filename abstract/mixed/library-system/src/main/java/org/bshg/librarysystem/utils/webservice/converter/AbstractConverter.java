@@ -4,9 +4,6 @@ import org.bshg.librarysystem.utils.entity.BaseEntity;
 import org.bshg.librarysystem.utils.webservice.dto.BaseDto;
 
 import java.util.List;
-import java.util.Set;
-import java.util.function.BiConsumer;
-import java.util.function.Function;
 
 import static org.bshg.librarysystem.utils.util.ListUtil.map;
 
@@ -30,7 +27,8 @@ public abstract class AbstractConverter<T extends BaseEntity, DTO extends BaseDt
 
     protected abstract void config();
 
-    protected void convertersConfig(boolean value) {}
+    protected void convertersConfig(boolean value) {
+    }
 
     public final DTO toDto(T item) {
         this.convertersConfig(false);
@@ -56,8 +54,10 @@ public abstract class AbstractConverter<T extends BaseEntity, DTO extends BaseDt
         initList(initialisation);
     }
 
-    public void initObject(boolean initialisationObject) {}
+    public void initObject(boolean initialisationObject) {
+    }
 
-    public void initList(boolean initialisationList) {}
+    public void initList(boolean initialisationList) {
+    }
 
 }

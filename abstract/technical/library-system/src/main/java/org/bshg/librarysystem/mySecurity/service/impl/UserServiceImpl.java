@@ -1,8 +1,8 @@
 package org.bshg.librarysystem.mySecurity.service.impl;
 
+import org.bshg.librarysystem.mySecurity.dao.UserDao;
 import org.bshg.librarysystem.mySecurity.entity.Role;
 import org.bshg.librarysystem.mySecurity.entity.User;
-import org.bshg.librarysystem.mySecurity.dao.UserDao;
 import org.bshg.librarysystem.mySecurity.service.facade.RoleService;
 import org.bshg.librarysystem.mySecurity.service.facade.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 

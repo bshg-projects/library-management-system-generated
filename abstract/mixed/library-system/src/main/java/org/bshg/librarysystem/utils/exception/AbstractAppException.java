@@ -21,8 +21,12 @@ public abstract class AbstractAppException extends RuntimeException {
         return new ApiError(message, status);
     }
 
-    public HttpStatus getStatus() {return status;}
-    public ExceptionType getType() {return type;}
+    public HttpStatus getStatus() {
+        return status;
+    }
+
     @Override
-    public String getMessage() {return message;}
+    public String getMessage() {
+        return message;
+    }
 }

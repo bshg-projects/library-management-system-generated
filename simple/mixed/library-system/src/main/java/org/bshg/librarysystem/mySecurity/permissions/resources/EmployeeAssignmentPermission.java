@@ -1,4 +1,5 @@
 package org.bshg.librarysystem.mySecurity.permissions.resources;
+
 import org.bshg.librarysystem.mySecurity.permissions.PermissionResource;
 
 public enum EmployeeAssignmentPermission implements PermissionResource {

@@ -10,9 +10,8 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.LongFunction;
-import java.util.function.UnaryOperator;
 
-public abstract class AbstractRestApi< T extends AuditEntity, DTO extends BaseDto, SERV extends IService<T>, CONV extends AbstractConverter<T, DTO>> extends RestApiHelper {
+public abstract class AbstractRestApi<T extends AuditEntity, DTO extends BaseDto, SERV extends IService<T>, CONV extends AbstractConverter<T, DTO>> extends RestApiHelper {
     protected SERV service;
     protected AbstractConverter<T, DTO> converter;
 

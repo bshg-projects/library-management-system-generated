@@ -2,7 +2,6 @@ package org.bshg.librarysystem.utils.sprocess.impl;
 
 import org.bshg.librarysystem.utils.entity.audit.AuditEntity;
 import org.bshg.librarysystem.utils.service.IService;
-import org.bshg.librarysystem.utils.sprocess.impl.AbstractProcessImpl;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;

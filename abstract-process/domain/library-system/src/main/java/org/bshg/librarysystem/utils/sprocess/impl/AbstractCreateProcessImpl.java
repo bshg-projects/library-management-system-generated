@@ -2,7 +2,6 @@ package org.bshg.librarysystem.utils.sprocess.impl;
 
 import org.bshg.librarysystem.utils.entity.audit.AuditEntity;
 import org.bshg.librarysystem.utils.service.IService;
-import org.bshg.librarysystem.utils.sprocess.impl.AbstractProcessImpl;
 
 import java.util.List;
 
@@ -18,5 +17,6 @@ public abstract class AbstractCreateProcessImpl<T extends AuditEntity, S extends
         return items;
     }
 
-    public void createAssociatedList(T item) { }
+    public void createAssociatedList(T item) {
+    }
 }

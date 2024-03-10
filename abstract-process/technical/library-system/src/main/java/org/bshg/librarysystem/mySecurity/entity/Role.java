@@ -27,10 +27,12 @@ public class Role extends BaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "permission")}
     )
     private Set<Permission> permissions = new HashSet<>();
+
     @Override
     public Long getId() {
         return id;
     }
+
     @Override
     public void setId(Long id) {
         this.id = id;

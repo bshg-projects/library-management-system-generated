@@ -20,13 +20,28 @@ public class ApiError {
         this.status = status;
     }
 
-    public String getMessage() {return message;}
-    public void setMessage(String message) {this.message = message;}
-    public int getStatusCode() {return statusCode;}
-    public HttpStatus getStatus() {return status;}
-    public Timestamp getTimestamp() {return timestamp;}
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    public int getStatusCode() {
+        return statusCode;
+    }
+
+    public HttpStatus getStatus() {
+        return status;
+    }
+
+    public Timestamp getTimestamp() {
+        return timestamp;
+    }
+
     public void setStatus(HttpStatus status) {
-    this.status = status;
-    this.statusCode = this.status.value();
+        this.status = status;
+        this.statusCode = this.status.value();
     }
 }

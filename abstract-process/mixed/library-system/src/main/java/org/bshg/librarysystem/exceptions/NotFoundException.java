@@ -1,8 +1,7 @@
 package org.bshg.librarysystem.exceptions;
-import org.springframework.http.HttpStatus;
 
-import org.springframework.http.HttpStatus;
 import org.bshg.librarysystem.utils.exception.AbstractAppException;
+import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends AbstractAppException {
     @Override

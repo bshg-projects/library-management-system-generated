@@ -2,18 +2,17 @@ package org.bshg.librarysystem.utils.webservice.restapi;
 
 import org.bshg.librarysystem.utils.entity.audit.AuditEntity;
 import org.bshg.librarysystem.utils.service.IService;
-import org.bshg.librarysystem.utils.webservice.converter.AbstractConverter;
-import org.bshg.librarysystem.utils.webservice.dto.BaseDto;
 import org.bshg.librarysystem.utils.sprocess.facade.ICreateProcess;
 import org.bshg.librarysystem.utils.sprocess.facade.IDeleteProcess;
 import org.bshg.librarysystem.utils.sprocess.facade.IUpdateProcess;
+import org.bshg.librarysystem.utils.webservice.converter.AbstractConverter;
+import org.bshg.librarysystem.utils.webservice.dto.BaseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.LongFunction;
-import java.util.function.UnaryOperator;
 
 public abstract class AbstractRestApi<
         T extends AuditEntity, DTO extends BaseDto,

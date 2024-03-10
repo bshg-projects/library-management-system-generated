@@ -2,18 +2,19 @@ package org.bshg.librarysystem.mySecurity.ws.converter;
 
 import org.bshg.librarysystem.mySecurity.entity.Role;
 import org.bshg.librarysystem.mySecurity.ws.dto.RoleDto;
+import org.bshg.librarysystem.utils.webservice.converter.AbstractConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import org.bshg.librarysystem.utils.webservice.converter.AbstractConverter;
-
-import java.util.List;
-
 @Component
 public class RoleConverter extends AbstractConverter<Role, RoleDto> {
-    @Autowired @Lazy private UserConverter userConverter;
-    @Autowired @Lazy private PermissionConverter permissionConverter;
+    @Autowired
+    @Lazy
+    private UserConverter userConverter;
+    @Autowired
+    @Lazy
+    private PermissionConverter permissionConverter;
     private boolean user = true;
     private boolean permission = true;
 

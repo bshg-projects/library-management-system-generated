@@ -2,13 +2,11 @@ package org.bshg.librarysystem.mySecurity.ws.converter;
 
 import org.bshg.librarysystem.mySecurity.entity.Permission;
 import org.bshg.librarysystem.mySecurity.ws.dto.PermissionDto;
+import org.bshg.librarysystem.utils.webservice.converter.AbstractConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
-import org.bshg.librarysystem.utils.webservice.converter.AbstractConverter;
-
-import java.util.Set;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,7 +27,7 @@ public class PermissionConverter extends AbstractConverter<Permission, Permissio
         var dto = new PermissionDto();
         dto.setId(item.getId());
         dto.setName(item.getName());
-        dto.setRoles(role? roleConverter.toDto(item.getRoles()): null);
+        dto.setRoles(role ? roleConverter.toDto(item.getRoles()) : null);
         return dto;
     }
 
@@ -38,7 +36,7 @@ public class PermissionConverter extends AbstractConverter<Permission, Permissio
         var item = new Permission();
         item.setId(dto.getId());
         item.setName(dto.getName());
-        item.setRoles(role? roleConverter.toItem(dto.getRoles()): null);
+        item.setRoles(role ? roleConverter.toItem(dto.getRoles()) : null);
         return item;
     }
 

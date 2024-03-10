@@ -1,8 +1,10 @@
 package org.bshg.librarysystem.repository.storage;
+
 import org.bshg.librarysystem.entity.core.storage.Shelf;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
+
 import java.util.List;
+
 public interface ShelfDao extends JpaRepository<Shelf, Long> {
-int deleteByIdIn(List<Long> ids);
+    int deleteByIdIn(List<Long> ids);
 }

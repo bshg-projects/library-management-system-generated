@@ -6,61 +6,61 @@ import java.io.Serializable;
 
 public class BaseDto implements Serializable {
 
-protected Long id;
-protected String label;
-@JsonIgnore
-protected int maxLevel = 2;
+    protected Long id;
+    protected String label;
+    @JsonIgnore
+    protected int maxLevel = 2;
 
-public BaseDto(Long id) {
-this.id = id;
-}
+    public BaseDto(Long id) {
+        this.id = id;
+    }
 
-public BaseDto() {
-}
+    public BaseDto() {
+    }
 
-@Override
-public boolean equals(Object object) {
-if (this.id != null && object instanceof BaseDto dto) {
-return this.id.equals(dto.getId());
-}
-return false;
-}
+    @Override
+    public boolean equals(Object object) {
+        if (this.id != null && object instanceof BaseDto dto) {
+            return this.id.equals(dto.getId());
+        }
+        return false;
+    }
 
 
-public int hashCode() {
-Serializable pk = id;
-if (pk == null) {
-return 0;
-}
-return pk.toString().hashCode();
-}
+    public int hashCode() {
+        Serializable pk = id;
+        if (pk == null) {
+            return 0;
+        }
+        return pk.toString().hashCode();
+    }
 
-public String toString() {
-return this.getId() != null ? this.getId().toString() : null;
-}
+    public String toString() {
+        return this.getId() != null ? this.getId().toString() : null;
+    }
 
-public Long getId() {
-return this.id;
-}
+    public Long getId() {
+        return this.id;
+    }
 
-public String getLabel() {
-return this.label;
-}
+    public String getLabel() {
+        return this.label;
+    }
 
-public int getMaxLevel() {
-return this.maxLevel;
-}
+    public int getMaxLevel() {
+        return this.maxLevel;
+    }
 
-public void setId(Long id) {
-this.id = id;
-}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-public void setLabel(String label) {
-this.label = label;
-}
+    public void setLabel(String label) {
+        this.label = label;
+    }
 
-@JsonIgnore
-public void setMaxLevel(int maxLevel) {
-this.maxLevel = maxLevel;
-}
+    @JsonIgnore
+    public void setMaxLevel(int maxLevel) {
+        this.maxLevel = maxLevel;
+    }
 }

@@ -7,7 +7,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.time.LocalDate;
 
 public class EntityListener implements Serializable {
 

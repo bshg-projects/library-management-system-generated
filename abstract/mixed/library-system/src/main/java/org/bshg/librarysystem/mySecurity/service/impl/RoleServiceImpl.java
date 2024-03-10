@@ -1,18 +1,14 @@
 package org.bshg.librarysystem.mySecurity.service.impl;
 
+import org.bshg.librarysystem.mySecurity.dao.RoleDao;
 import org.bshg.librarysystem.mySecurity.entity.Permission;
 import org.bshg.librarysystem.mySecurity.entity.Role;
-import org.bshg.librarysystem.mySecurity.dao.RoleDao;
 import org.bshg.librarysystem.mySecurity.service.facade.PermissionService;
 import org.bshg.librarysystem.mySecurity.service.facade.RoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class RoleServiceImpl implements RoleService {
@@ -78,8 +74,8 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Role save(Role role) {
-        Role foundRole =  findByName(role.getName());
-        if(foundRole != null) return foundRole;
+        Role foundRole = findByName(role.getName());
+        if (foundRole != null) return foundRole;
         Set<Permission> perms = new HashSet<>();
         role.getPermissions().forEach(perm -> {
             perms.add(permissionService.save(perm));

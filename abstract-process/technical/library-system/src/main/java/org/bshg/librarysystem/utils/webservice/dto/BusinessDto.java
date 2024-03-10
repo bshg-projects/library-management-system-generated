@@ -4,35 +4,35 @@ import java.io.Serializable;
 
 public class BusinessDto implements Serializable {
 
-private Long id;
+    private Long id;
 
-private String label;
+    private String label;
 
-public BusinessDto(Long id, String label) {
-this.id = id;
-this.label = label;
-}
+    public BusinessDto(Long id, String label) {
+        this.id = id;
+        this.label = label;
+    }
 
-public BusinessDto() {
-}
+    public BusinessDto() {
+    }
 
-public String toString() {
-return this.getId() != null ? this.getId().toString() : null;
-}
+    public String toString() {
+        return this.getId() != null ? this.getId().toString() : null;
+    }
 
-public Long getId() {
-return this.id;
-}
+    public Long getId() {
+        return this.id;
+    }
 
-public String getLabel() {
-return this.label;
-}
+    public String getLabel() {
+        return this.label;
+    }
 
-public void setId(Long id) {
-this.id = id;
-}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-public void setLabel(String label) {
-this.label = label;
-}
+    public void setLabel(String label) {
+        this.label = label;
+    }
 }

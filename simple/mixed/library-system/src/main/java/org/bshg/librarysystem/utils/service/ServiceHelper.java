@@ -1,14 +1,16 @@
 package org.bshg.librarysystem.utils.service;
 
-import org.bshg.librarysystem.utils.entity.BaseEntity;
 import org.bshg.librarysystem.utils.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.*;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
+import java.util.function.Function;
 
 public class ServiceHelper {
-    private ServiceHelper(){}
+    private ServiceHelper() {
+    }
 
     public static <T> List<List<T>> getToBeSavedAndToBeDeleted(List<T> oldList, List<T> newList) {
         boolean oldEmpty = ListUtil.isEmpty(oldList);
@@ -53,7 +55,7 @@ public class ServiceHelper {
     }
 
     public static <T, L>
-    void createList( T entity, Function<T, List<L>> getter, BiConsumer<L, T> setter, Function<L,L> creator) {
+    void createList(T entity, Function<T, List<L>> getter, BiConsumer<L, T> setter, Function<L, L> creator) {
         List<L> list = getter.apply(entity);
         if (list != null) {
             list.forEach(el -> {
@@ -63,14 +65,14 @@ public class ServiceHelper {
         }
     }
 
-    public static < T, L>
+    public static <T, L>
     void updateList(
-        T item,
-        List<L> oldList,
-        List<L> newList,
-        BiConsumer<L, T> setter,
-        Consumer<List<L>> updater,
-        Consumer<List<L>> deleter
+            T item,
+            List<L> oldList,
+            List<L> newList,
+            BiConsumer<L, T> setter,
+            Consumer<List<L>> updater,
+            Consumer<List<L>> deleter
     ) {
         List<List<L>> result = getToBeSavedAndToBeDeleted(oldList, newList);
         deleter.accept(result.get(1));

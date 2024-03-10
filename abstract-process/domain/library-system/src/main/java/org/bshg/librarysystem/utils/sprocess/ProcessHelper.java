@@ -1,17 +1,18 @@
 package org.bshg.librarysystem.utils.sprocess;
 
 import org.bshg.librarysystem.utils.entity.audit.AuditEntity;
-import org.bshg.librarysystem.utils.util.ListUtil;
 import org.bshg.librarysystem.utils.sprocess.facade.ICreateProcess;
 import org.bshg.librarysystem.utils.sprocess.facade.IDeleteProcess;
 import org.bshg.librarysystem.utils.sprocess.facade.IUpdateProcess;
+import org.bshg.librarysystem.utils.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.*;
 
 public class ProcessHelper {
-    private ProcessHelper(){}
+    private ProcessHelper() {
+    }
 
     public static <T extends AuditEntity> List<List<T>> getToBeSavedAndToBeDeleted(List<T> oldList, List<T> newList) {
         boolean oldEmpty = ListUtil.isEmpty(oldList);
@@ -105,10 +106,10 @@ public class ProcessHelper {
             DP deleteProcess
     ) {
         updateList(
-            item, getOldList, getNewList,
-            ProcessHelper::getToBeSavedAndToBeDeleted,
-            it -> setItem.accept(it, item),
-            updateProcess, deleteProcess
+                item, getOldList, getNewList,
+                ProcessHelper::getToBeSavedAndToBeDeleted,
+                it -> setItem.accept(it, item),
+                updateProcess, deleteProcess
         );
     }
 }

@@ -8,7 +8,8 @@ import java.util.List;
 import java.util.function.*;
 
 public class ServiceHelper {
-    private ServiceHelper(){}
+    private ServiceHelper() {
+    }
 
     public static <T extends AuditEntity> List<List<T>> getToBeSavedAndToBeDeleted(List<T> oldList, List<T> newList) {
         boolean oldEmpty = ListUtil.isEmpty(oldList);
@@ -53,7 +54,7 @@ public class ServiceHelper {
     }
 
     public static <T extends AuditEntity, L extends AuditEntity, S extends IService<L>>
-    void createList( T entity, Function<T, List<L>> getter, BiConsumer<L, T> setter, S service) {
+    void createList(T entity, Function<T, List<L>> getter, BiConsumer<L, T> setter, S service) {
         List<L> list = getter.apply(entity);
         if (list != null) {
             list.forEach(el -> {
@@ -63,15 +64,15 @@ public class ServiceHelper {
         }
     }
 
-    public static < T extends AuditEntity, L extends AuditEntity, S extends IService<L>>
-    void updateList(T item, LongFunction<List<L>> getOldList, Function<T, List<L>> getNewList, BiFunction<List<L>, List<L>, List<List<L>>> listsFilter, Consumer<L> applyBeforeUpdating,S service) {
+    public static <T extends AuditEntity, L extends AuditEntity, S extends IService<L>>
+    void updateList(T item, LongFunction<List<L>> getOldList, Function<T, List<L>> getNewList, BiFunction<List<L>, List<L>, List<List<L>>> listsFilter, Consumer<L> applyBeforeUpdating, S service) {
         List<List<L>> result = listsFilter.apply(getOldList.apply(item.getId()), getNewList.apply(item));
         service.delete(result.get(1));
         ListUtil.emptyIfNull(result.get(0)).forEach(applyBeforeUpdating);
         service.update(result.get(0));
     }
 
-    public static < T extends AuditEntity, L extends AuditEntity, S extends IService<L>>
+    public static <T extends AuditEntity, L extends AuditEntity, S extends IService<L>>
     void updateList(T item, LongFunction<List<L>> getOldList, Function<T, List<L>> getNewList, BiConsumer<L, T> setItem, S service) {
         updateList(item, getOldList, getNewList, ServiceHelper::getToBeSavedAndToBeDeleted, it -> setItem.accept(it, item), service);
     }

@@ -24,22 +24,22 @@ public class PermissionConverter {
     }
 
     public final PermissionDto toDto(Permission item) {
-        if(item == null) return null;
+        if (item == null) return null;
         this.convertersConfig(false);
         var dto = new PermissionDto();
         dto.setId(item.getId());
         dto.setName(item.getName());
-        dto.setRoles(role? roleConverter.toDto(item.getRoles()): null);
+        dto.setRoles(role ? roleConverter.toDto(item.getRoles()) : null);
         this.convertersConfig(true);
         return dto;
     }
 
     public final Permission toItem(PermissionDto dto) {
-        if(dto == null) return null;
+        if (dto == null) return null;
         var item = new Permission();
         item.setId(dto.getId());
         item.setName(dto.getName());
-        item.setRoles(role? roleConverter.toItem(dto.getRoles()): null);
+        item.setRoles(role ? roleConverter.toItem(dto.getRoles()) : null);
         return item;
     }
 

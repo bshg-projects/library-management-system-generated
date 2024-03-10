@@ -1,15 +1,19 @@
 package org.bshg.librarysystem.reservation;
-import org.bshg.librarysystem.reservation.Reservation;
-import org.bshg.librarysystem.book.Book;
-import org.bshg.librarysystem.client.Client;
+
 import org.bshg.librarysystem.utils.repository.Repository;
 import org.springframework.data.jpa.repository.Query;
+
 import java.util.List;
+
 public interface ReservationDao extends Repository<Reservation, Long> {
-int deleteByBookId(Long id);
-Reservation findByBookId(Long id);
-int deleteByClientId(Long id);
-List<Reservation> findByClientId(Long id);
-@Query("SELECT NEW Reservation(item.id,item.name) FROM Reservation item")
-List<Reservation> findAllOptimized();
+    int deleteByBookId(Long id);
+
+    Reservation findByBookId(Long id);
+
+    int deleteByClientId(Long id);
+
+    List<Reservation> findByClientId(Long id);
+
+    @Query("SELECT NEW Reservation(item.id,item.name) FROM Reservation item")
+    List<Reservation> findAllOptimized();
 }

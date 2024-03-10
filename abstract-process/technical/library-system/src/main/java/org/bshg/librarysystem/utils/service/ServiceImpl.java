@@ -2,12 +2,9 @@ package org.bshg.librarysystem.utils.service;
 
 import org.bshg.librarysystem.utils.entity.audit.AuditEntity;
 import org.bshg.librarysystem.utils.repository.Repository;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public abstract class ServiceImpl<T extends AuditEntity, REPO extends Repository<T, Long>> {
     protected REPO dao;

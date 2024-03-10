@@ -1,11 +1,10 @@
 package org.bshg.librarysystem.publisher.services;
+
 import org.bshg.librarysystem.publisher.Publisher;
-import org.bshg.librarysystem.address.Address;
-import org.bshg.librarysystem.book.Book;
-import org.bshg.librarysystem.magazine.Magazine;
 import org.bshg.librarysystem.utils.service.IService;
-import java.util.List;
+
 public interface PublisherService extends IService<Publisher> {
-int deleteByAddressId(Long id);
-Publisher findByAddressId(Long id);
+    int deleteByAddressId(Long id);
+
+    Publisher findByAddressId(Long id);
 }

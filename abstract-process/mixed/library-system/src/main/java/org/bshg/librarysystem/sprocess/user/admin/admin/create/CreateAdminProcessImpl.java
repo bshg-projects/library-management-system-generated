@@ -1,34 +1,39 @@
 package org.bshg.librarysystem.sprocess.user.admin.admin.create;
+
 import org.bshg.librarysystem.entity.core.user.admin.Admin;
+import org.bshg.librarysystem.entity.core.user.admin.EmployeeAssignment;
 import org.bshg.librarysystem.services.user.admin.admin.AdminService;
-import org.bshg.librarysystem.sprocess.user.admin.admin.create.CreateAdminProcess;
 import org.bshg.librarysystem.services.user.admin.employeeassignment.EmployeeAssignmentService;
 import org.bshg.librarysystem.sprocess.user.admin.employeeassignment.create.CreateEmployeeAssignmentProcess;
-import org.bshg.librarysystem.entity.core.user.admin.EmployeeAssignment;
-import org.bshg.librarysystem.utils.sprocess.impl.AbstractCreateProcessImpl;
 import org.bshg.librarysystem.utils.sprocess.ProcessHelper;
+import org.bshg.librarysystem.utils.sprocess.impl.AbstractCreateProcessImpl;
 import org.springframework.transaction.annotation.Transactional;
+
 public class CreateAdminProcessImpl extends AbstractCreateProcessImpl<Admin, AdminService> implements CreateAdminProcess {
-public CreateAdminProcessImpl(AdminService service, EmployeeAssignmentService employeeAssignmentService) {
-super(service);
-this.employeeAssignmentService = employeeAssignmentService;
-}
-@Override
-@Transactional(rollbackFor = Exception.class)
-public Admin run(Admin item) {
+    public CreateAdminProcessImpl(AdminService service, EmployeeAssignmentService employeeAssignmentService) {
+        super(service);
+        this.employeeAssignmentService = employeeAssignmentService;
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public Admin run(Admin item) {
 // Your Insert Logic For 'Admin'
-item = service.create(item);
-createAssociatedList(item);
-return item;
-}
-@Override
-public void createAssociatedList(Admin item) {
-if (item == null || item.getId() == null) return;
-ProcessHelper.createList(item, Admin::getEmployeeAssignment, EmployeeAssignment::setAdmin, createEmployeeAssignmentProcess);
-}
-private EmployeeAssignmentService employeeAssignmentService;
-private CreateEmployeeAssignmentProcess createEmployeeAssignmentProcess;
-public void setCreateEmployeeAssignmentProcess(CreateEmployeeAssignmentProcess value) {
-this.createEmployeeAssignmentProcess = value;
-}
+        item = service.create(item);
+        createAssociatedList(item);
+        return item;
+    }
+
+    @Override
+    public void createAssociatedList(Admin item) {
+        if (item == null || item.getId() == null) return;
+        ProcessHelper.createList(item, Admin::getEmployeeAssignment, EmployeeAssignment::setAdmin, createEmployeeAssignmentProcess);
+    }
+
+    private EmployeeAssignmentService employeeAssignmentService;
+    private CreateEmployeeAssignmentProcess createEmployeeAssignmentProcess;
+
+    public void setCreateEmployeeAssignmentProcess(CreateEmployeeAssignmentProcess value) {
+        this.createEmployeeAssignmentProcess = value;
+    }
 }

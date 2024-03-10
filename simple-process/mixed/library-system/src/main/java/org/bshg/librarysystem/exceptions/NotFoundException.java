@@ -1,4 +1,5 @@
 package org.bshg.librarysystem.exceptions;
+
 import org.springframework.http.HttpStatus;
 
 public class NotFoundException extends RuntimeException {
@@ -8,5 +9,7 @@ public class NotFoundException extends RuntimeException {
         super(message);
     }
 
-    public HttpStatus getStatus() {return status;}
+    public HttpStatus getStatus() {
+        return status;
+    }
 }

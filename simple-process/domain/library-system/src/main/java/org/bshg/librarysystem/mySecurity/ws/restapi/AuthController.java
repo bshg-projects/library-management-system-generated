@@ -1,13 +1,10 @@
 package org.bshg.librarysystem.mySecurity.ws.restapi;
 
 import org.bshg.librarysystem.mySecurity.entity.Authority;
-import org.bshg.librarysystem.mySecurity.entity.Role;
 import org.bshg.librarysystem.mySecurity.entity.User;
-import org.bshg.librarysystem.mySecurity.utils.SecurityParams;
 import org.bshg.librarysystem.mySecurity.jwt.JwtUtils;
 import org.bshg.librarysystem.mySecurity.ws.dto.request.LoginRequest;
 import org.bshg.librarysystem.mySecurity.ws.dto.response.JwtResponse;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,10 +31,10 @@ public class AuthController {
     @PostMapping
     public ResponseEntity<JwtResponse> authenticateUser(@RequestBody LoginRequest loginRequest) {
         Authentication authentication = authenticationManager.authenticate(
-            new UsernamePasswordAuthenticationToken(
-                loginRequest.getUsername(),
-                loginRequest.getPassword()
-            )
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword()
+                )
         );
 
         SecurityContextHolder.getContext().setAuthentication(authentication);

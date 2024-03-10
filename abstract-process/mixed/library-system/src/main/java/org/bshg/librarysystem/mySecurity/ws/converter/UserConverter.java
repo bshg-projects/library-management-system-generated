@@ -2,12 +2,10 @@ package org.bshg.librarysystem.mySecurity.ws.converter;
 
 import org.bshg.librarysystem.mySecurity.entity.User;
 import org.bshg.librarysystem.mySecurity.ws.dto.UserDto;
+import org.bshg.librarysystem.utils.webservice.converter.AbstractConverter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
-import org.bshg.librarysystem.utils.webservice.converter.AbstractConverter;
-
-import java.util.List;
 
 @Component
 public class UserConverter extends AbstractConverter<User, UserDto> {
